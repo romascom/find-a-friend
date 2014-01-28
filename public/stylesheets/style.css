@@ -1,0 +1,14 @@
+table, td {
+	margin: 0 auto;
+	border: 1px solid black;
+	border-radius:6px;
+	-moz-border-radius:6px;
+	padding: 6px;
+}
+tr {
+	background-color: orange;
+}
+body {
+	text-align:center;
+	width: 100%;
+}
