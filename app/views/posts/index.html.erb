@@ -1,8 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find-a-Friend</title>
+	<%= stylesheet_link_tag "style.css" %>
+</head>
+
+<body>
+<header><%= image_tag("icon_banner.png") %></header>
 <h1>Listing posts</h1>
-
-<%= link_to 'New_post', new_post_path %>
-<%= stylesheet_link_tag "style.css" %>
-
+<nav><%= link_to 'New_post', new_post_path %></nav>
 <table>
   <tr>
     <th>Title</th>
@@ -20,3 +26,5 @@
     </tr>
   <% end %>
 </table>
+</body>
+</html>
