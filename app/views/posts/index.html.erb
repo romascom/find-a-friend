@@ -3,12 +3,39 @@
 <head>
 	<title>Find-a-Friend</title>
 	<%= stylesheet_link_tag "style.css" %>
+
+	<!-- Bootstrap -->
+	<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+
+<div class="navbar">
+              <div class="navbar-inner">
+                <div class="container">
+                  <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Downloads</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><%= link_to 'New post', new_post_path %></li>
+                  </ul>
+                </div>
+              </div>
+</div>
+<!--<nav class="navbar">
+	<div class=
+	<div class="container-fluid">
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<ul class="nav navbar-nav">
+		<li><%= link_to 'New_post', new_post_path, :class => "button" %></li>
+	</ul>
+	</div>
+	</div>
+</nav>-->
 <header><%= image_tag("icon_banner.png") %></header>
 <h1>Listing posts</h1>
-<nav><%= link_to 'New_post', new_post_path %></nav>
 <table>
   <tr>
     <th>Title</th>
