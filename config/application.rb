@@ -29,5 +29,7 @@ module Blog
 	:request_specs => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
+
+    config.i18n.enforce_available_locales = true
   end
 end
