@@ -17,4 +17,11 @@ describe "Home page" do
     page.should have_content('Some title')
     page.should have_content('Some description')
   end
+
+  it "edits a post" do
+    click_link('Edit')
+    within(:css, "form#new_post") do
+
+    end
+  end
 end

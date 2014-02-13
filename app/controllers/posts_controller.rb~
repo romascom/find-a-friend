@@ -7,9 +7,9 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post].permit(:title, :description))
 
     if @post.save
-      redirect_to action: "index" #Post.all # stop redirection to show
+      redirect_to 'index' #@post # stop redirection to show
     else
-      render 'new'
+      render 'index'#'new'
     end
   end
 
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
  
     if @post.update(params[:post].permit(:title, :description))
-      redirect_to action: "index" #@post
+      redirect_to @post
     else
       render 'edit'
     end
