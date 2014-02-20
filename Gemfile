@@ -11,6 +11,7 @@ group :test do
   gem 'database_cleaner'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'capybara-webkit'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

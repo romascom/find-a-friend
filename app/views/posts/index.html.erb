@@ -100,7 +100,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"><%= post.title %></a></h4>
 					</div>
-					<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse in" style="height: 0px;">
+					<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse in">
 						<div class="panel-body">
 							<%= post.description %>
 						</div>
@@ -111,6 +111,9 @@
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 			<script src="bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+
+			<script type="text/javascript"><% @posts.each do |post| %>
+$("#collapse-<%= dom_id(post) %>").collapse("hide");<% end %></script>
 		</div>
 	</body>
 </html>
