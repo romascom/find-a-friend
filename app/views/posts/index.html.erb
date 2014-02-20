@@ -96,16 +96,7 @@
 
 			<div class="panel-group" id="accordion">
 				<% @posts.each do |post| %>
-				<div class="panel panel-default" style="display: block;">
-					<div class="panel-heading">
-						<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"><%= post.title %></a></h4>
-					</div>
-					<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse in">
-						<div class="panel-body">
-							<%= post.description %>
-						</div>
-					</div>
-				</div>
+				<%= render post %>
 				<% end %>
 			</div>
 
