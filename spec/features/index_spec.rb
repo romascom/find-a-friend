@@ -38,15 +38,24 @@ describe "the home page", :js => true do
     end
     page.should have_content('Some title')
     page.should have_content('Some description')
-  end
+  end  
   
   it "expands a post" do
-    within('#accordion') do
-      #find('#collapse-post_1').should have_content('test_post') # It doesn't seem like the post is created
-      page.should have_no_content('test_description')
-      click_link('test_post')
-      page.should have_content('test_post')
-      page.should have_content('test_description')
+    click_link('New post')
+    #save_and_open_page
+    within(:css, "form#new_post") do
+      fill_in('post[title]', :with => 'Some title')
+      fill_in('post[description]', :with => 'Some description')
+      click_button 'Create Post'
     end
+    #within('#accordion') do
+      #find('#collapse-post_1').should have_content('test_post') # It doesn't seem like the post is created
+      #page.should have_no_content('test_description')
+      
+    visit('/posts');
+      click_link('Some title')
+      page.should have_content('Some description')
+      #page.should have_content('test_description')
+    #end
   end
 end
