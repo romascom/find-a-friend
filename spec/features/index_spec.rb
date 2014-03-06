@@ -12,12 +12,12 @@ describe "the post creation process" do
     click_link('New post')
     #save_and_open_page
     within(:css, "form#new_post") do
-      fill_in('post[title]', :with => 'Some title')
-      fill_in('post[description]', :with => 'Some description')
+      fill_in('post[title]', :with => 'New title')
+      fill_in('post[description]', :with => 'New description')
       click_button 'Create Post'
     end
-    page.should have_content('Some title')
-    page.should have_content('Some description')
+    page.should have_content('New title')
+    page.should have_content('New description')
     page.should have_no_content('Create Post')
   end
 end
@@ -30,17 +30,19 @@ describe "the home page", :js => true do
   end
   
   it "edits a post" do
-    click_link('Edit')
-    within(:css, "form#new_post") do #may be incorrect id
+    find('#accordion').click_link('Edit')
+    within(:css, "form#edit_post_1") do #may be incorrect id
       fill_in('post[title]', :with => 'Some title')
       fill_in('post[description]', :with => 'Some description')
-      click_button 'Create Post'
+      click_button 'Update Post'
     end
     page.should have_content('Some title')
-    page.should have_content('Some description')
+click_link('Some title')
+      page.should have_content('Some description')
   end  
   
   it "expands a post" do
+    save_and_open_page
     click_link('New post')
     #save_and_open_page
     within(:css, "form#new_post") do
