@@ -3,6 +3,39 @@ require 'factory_girl_rails'
 
 # Would a spec that checks for all elements that should exist in a web page be overkill?
 
+describe "list" do
+  before :each do
+    Capybara.current_driver = :webkit # temporarily select different driver
+  end
+  
+  it "should update automatically" do
+    visit('/posts');
+    find('#accordion').should_not have_css('panel panel-default')
+    FactoryGirl.create(:post, title: "test_post", description: "test_description")
+    find('#accordion').should have_css('panel panel-default')
+  end
+end
+
+describe "post" do
+  before :each do
+    Capybara.current_driver = :webkit # temporarily select different driver
+    FactoryGirl.create(:post, title: "test_post", description: "test_description", meeting_time: "", expire_time: "")
+    visit('/posts');
+  end
+
+  it "contains a complete header" do
+    find('#accordion').within(:css, 'h4') do
+      should have_content("test_post")
+      should have_content("Edit") # I think this should be moved to description area
+      should have_content("")
+    end
+  end
+  
+  it "nonviewable if too old" do
+    
+  end
+end
+
 describe "the post creation process" do
   before :each do
     visit('/posts')
@@ -22,7 +55,7 @@ describe "the post creation process" do
   end
 end
 
-describe "the home page", :js => true do
+describe "the user", :js => true do
   before :each do
     Capybara.current_driver = :webkit # temporarily select different driver
     FactoryGirl.create(:post, title: "test_post", description: "test_description")
@@ -42,7 +75,6 @@ click_link('Some title')
   end  
   
   it "expands a post" do
-    save_and_open_page
     click_link('New post')
     #save_and_open_page
     within(:css, "form#new_post") do

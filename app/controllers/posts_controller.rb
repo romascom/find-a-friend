@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post].permit(:title, :description))
+    @post = Post.new(params[:post].permit(:title, :description, :meeting_time))
 
     ## if @post.save
     #  redirect_to action: "index" #Post.all # stop redirection to show
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
 
-    if @post.update(params[:post].permit(:title, :description))
+    if @post.update(params[:post].permit(:title, :description, :meeting_time))
       redirect_to action: "index" #@post
     else
       render 'edit'
@@ -50,6 +50,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description)
+    params.require(:post).permit(:title, :description, :meeting_time)
   end
 end
