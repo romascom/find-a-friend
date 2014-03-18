@@ -22,11 +22,12 @@
   
   <p>
   	<%= f.label :meeting_time %><br>
-  	<!--<%= datetime_select :post, :meeting_time %>-->
+  	<%= f.text_field :meeting_time , :class => 'datetime_picker' %>
+  	<!--<%= text_field_tag(:meeting_time) %>-->
+  	<!--<%= datetime_select :post, :meeting_time %>
   	<%= select_year(2009) %>
   	<%= select_year(Time.now) %>
-  	Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)
-  	<%= datetime_select :post, :meeting_time %>
+  	Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)-->
   </p>
  
   <p>

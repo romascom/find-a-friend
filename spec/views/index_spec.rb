@@ -7,6 +7,7 @@ describe "posts/index.html.erb" do
   
   it "renders a post" do
     render
-    expect(rendered).to render_template("_post")
+    #expect(rendered).to render_template("_post")
+    response.should render_template(:partial => '_post')
   end
 end

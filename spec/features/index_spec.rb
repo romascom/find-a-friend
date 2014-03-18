@@ -27,7 +27,6 @@ describe "post" do
     find('#accordion').within(:css, 'h4') do
       should have_content("test_post")
       should have_content("Edit") # I think this should be moved to description area
-      should have_content("")
     end
   end
   
