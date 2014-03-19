@@ -4,8 +4,12 @@
 	</div>
 	<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse">
 		<div class="panel-body">
-			<%= post.meeting_time %>
-			<%= post.description %>
+			<div>
+				<%= post.try(:meeting_time).try(:strftime,'%A, %d %B %Y - %I:%M %p %Z') %>
+			</div>
+			<p>
+				<%= post.description %>
+			</p>
 		</div>
 	</div>
 </div>
