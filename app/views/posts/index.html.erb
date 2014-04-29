@@ -6,9 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>Find-a-Friend</title>
 
-		<!-- <script src="javascripts/jquery-2.1.0.min.js"></script>
-		<script src="javascripts/jquery.mobile-1.4.1.min.js"></script>
+		<script src="javascripts/jquery-2.1.0.min.js"></script>
+		<!-- <script src="javascripts/jquery.mobile-1.4.1.min.js"></script>
 		<script src="stylesheets/jquery.mobile-1.4.1.min.css"></script> -->
+
+		<script src="javascripts/post.js"></script>
 
 		<!-- Bootstrap
 		<link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -62,7 +64,7 @@
 			<h1>Groups</h1>
 
 			<div class="panel-group" id="accordion">
-				<%= render "post" %>
+				<%= render partial: "post", collection: @posts %>
 			</div>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -72,5 +74,22 @@
 			<!--<script type="text/javascript"><% @posts.each do |post| %>
 			$("#collapse-<%= dom_id(post) %>").collapse("hide");<% end %></script>-->
 		</div>
+
+		<script type="text/javascript">
+			function toggleStyle() {
+				//$("div#accordion").replaceWith('<div class="panel-group" id="accordion">Winkie</div>');
+				$.ajax({
+					type : 'GET',
+					//dataType: "json",
+					url : 'posts#index.js',
+					//async : true,
+					//data: {},
+					dataType : "script"
+				});
+			}
+		</script>
+		<button type="button" onclick="toggleStyle();">
+			Toggle Style
+		</button>
 	</body>
 </html>

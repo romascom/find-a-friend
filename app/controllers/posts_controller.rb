@@ -27,10 +27,27 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
   end
+  
+  def post
+    respond_to do |format|
+      format.js
+    end
+    #@posts = Post.all
+    #respond_to do |format|
+    #  format.html { }
+    #  format.js { }
+    #end
+    #render :partial => "posts/post", collection: @posts
+  end
 
   def index
     @posts = Post.all
     @post = Post.new
+    
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   def edit

@@ -1,5 +1,5 @@
 Blog::Application.routes.draw do
-
+  #get 'posts/index'
   resources :posts
 
   root to: "posts#index"
