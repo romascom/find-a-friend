@@ -76,7 +76,7 @@
 		</div>
 
 		<script type="text/javascript">
-			function toggleStyle() {
+			(function toggleStyle() {
 				//$("div#accordion").replaceWith('<div class="panel-group" id="accordion">Winkie</div>');
 				$.ajax({
 					type : 'GET',
@@ -84,9 +84,12 @@
 					url : 'posts#index.js',
 					//async : true,
 					//data: {},
-					dataType : "script"
+					dataType : "script",
+					success: function() {
+						setTimeout(toggleStyle, 10000);
+					}
 				});
-			}
+			})();
 		</script>
 		<button type="button" onclick="toggleStyle();">
 			Toggle Style
