@@ -39,11 +39,11 @@ Blog::Application.configure do
 		#:tls 						=> true,
 		:address 				=> "smtp.gmail.com",
 		:port 					=> 587,
-		:domain 					=> "localhost",
-		:authentication 		=> "plain",
+		:domain 				=> "localhost",
+		:authentication => "plain",
 
-		:user_name      		=> "findafriendapp@gmail.com",
-		:password       		=> "587library587",
+		:user_name      => "findafriendapp@gmail.com",
+		:password       => "587library587",
 		:enable_starttls_auto => true
 				    	
 	}
