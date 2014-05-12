@@ -62,6 +62,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     if @post.update(params[:post].permit(:title, :description, :meeting_time, :recipients))
+      UserMailer.welcome_email(@post).deliver
       redirect_to action: "index" #@post
     else
       render 'edit'
