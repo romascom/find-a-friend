@@ -1,5 +1,16 @@
 
 class PostsController < ApplicationController
+rescue_from SocketError, :with => :connection_error
+def connection_error
+
+  #print "TACOS"
+  #render plain: "MORE TACOS"
+  
+  flash[:notice] = "You're not connected to the internet."
+  redirect_to :back
+  #print "TACOS"
+#redirect_to(:controller => 'start', :action => "post")
+end
   def new
     @post = Post.new
   end
@@ -16,7 +27,9 @@ class PostsController < ApplicationController
 		
     respond_to do |format|
       if @post.save
-	UserMailer.welcome_email(@post).deliver
+        if @post.recipients.present?
+	       UserMailer.welcome_email(@post).deliver
+	       end
         format.html { redirect_to "/", notice: 'Post was successfully created.' }
         format.js   {}
         format.json { render json: @post, status: :created, location: @post }
@@ -62,7 +75,9 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     if @post.update(params[:post].permit(:title, :description, :meeting_time, :recipients))
-      UserMailer.welcome_email(@post).deliver
+        if @post.recipients.present?
+         UserMailer.welcome_email(@post).deliver
+        end
       redirect_to action: "index" #@post
     else
       render 'edit'
