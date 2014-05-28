@@ -1,9 +1,0 @@
-class UserMailer < ActionMailer::Base
-  default from: "findafriendapp@gmail.com"
-	
-	def welcome_email(post)
-		@post = post
-		@url = 'http://www.google.com'
-		mail(to: ["joshua.stromme@gmail.com"], subject: post.title, body: post.description )
-	end
-end
