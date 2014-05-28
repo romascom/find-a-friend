@@ -1,4 +1,5 @@
 Blog::Application.routes.draw do
+  get "users/new"
   #get 'posts/index'
   resources :posts
 

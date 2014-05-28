@@ -4,6 +4,6 @@ class UserMailer < ActionMailer::Base
 	def welcome_email(post)
 		@post = post
 		@url = 'http://www.google.com'
-		mail(to: post.recipients, subject: post.title, body: post.description )
+		mail(to: post.recipients, subject: post.title, body:   @post.description )
 	end
 end
