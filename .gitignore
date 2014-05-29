@@ -17,3 +17,6 @@
 
 # Ignore all swap files
 *.swp
+
+# Ignore gedit backup files
+*~
