@@ -1,7 +1,15 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> <%= link_to 'Edit', edit_post_path(post), :class => 'edit-link' %> </h4>
+	<% if post.user_id == current_user.id %>
+		<div class="panel-heading">
+			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> <%= link_to 'Edit', edit_post_path(post), :class => 'edit-link' %></h4>
 	</div>
+	
+	<% else %>
+		<div class="panel-heading">
+			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> </h4>
+		</div>
+     <% end %>
+
 	<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse">
 		<div class="panel-body">
 			<div>

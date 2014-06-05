@@ -1,5 +1,8 @@
+
+
 <%= form_for @post do |f| %>
   <% if @post.errors.any? %>
+
   <div id="error_explanation">
     <h2><%= pluralize(@post.errors.count, "error") %> prohibited
       this post from being saved:</h2>
@@ -27,8 +30,7 @@
     <%= f.label :recipients %><br>
     <%= f.text_area :recipients %>
   </p>
-	
-  
+
   <p>
   	<%= f.label :meeting_time %><br>
   	<%= f.text_field :meeting_time , :class => 'datetime_picker' %>
@@ -38,10 +40,17 @@
   	<%= select_year(Time.now) %>
   	Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)-->
   </p>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
  	
 
 
+ 
   <p>
     <%= f.submit %>
   </p>
 <% end %>
+
+
+
+
+
