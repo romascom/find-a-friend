@@ -1,5 +1,6 @@
 
 class PostsController < ApplicationController
+before_action :signed_in_user, only: [:create, :edit, :update]
 rescue_from SocketError, :with => :connection_error
 def connection_error
 
@@ -15,9 +16,9 @@ end
     @post = Post.new
   end
 	
-  
+   
 	def create
-    @post = Post.new(params[:post].permit(:title, :description, :meeting_time, :recipients))
+    @post = Post.new(params[:post].permit(:title, :description, :meeting_time, :recipients, :user_id))
 
     ## if @post.save
     #  redirect_to action: "index" #Post.all # stop redirection to show
@@ -73,21 +74,21 @@ end
 
   def update
     @post = Post.find(params[:id])
-
-    if @post.update(params[:post].permit(:title, :description, :meeting_time, :recipients))
+    #redirect_to action: "index" unless @post.user_id == current_user.id
+    if @post.user_id == current_user.id && @post.update(params[:post].permit(:title, :description, :meeting_time, :recipients, :user_id))
         if @post.recipients.present?
-         UserMailer.welcome_email(@post).deliver
+          UserMailer.welcome_email(@post).deliver
         end
-      redirect_to action: "index" #@post
-    else
-      render 'edit'
+        redirect_to action: "index" #@post
+    	else
+        render 'edit'
     end
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :meeting_time, :recipients)
+    params.require(:post).permit(:title, :description, :meeting_time, :recipients, :user_id)
   end
 
 	
