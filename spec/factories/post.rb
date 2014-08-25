@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :posts do
+  factory :post do
     sequence(:title) { |n| "Group Title Number #{n}" }
     description "Description Text"
     meeting_time "2014-07-02 13:58:43"
