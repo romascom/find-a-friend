@@ -10,14 +10,14 @@
 		</div>
      <% end %>
 
-	<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse">
+	<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse in">
 		<div class="panel-body">
-			<div>
-				<%= post.try(:meeting_time).try(:strftime,'%A, %d %B %Y - %I:%M %p %Z') %>
-			</div>
 			<p>
-				<%= post.description %>
+				Group Description: <%= post.description %>
 			</p>
+			<div>
+				Meeting Time: <%= post.try(:meeting_time).try(:strftime,'%A, %d %B %Y - %I:%M %p %Z') %>
+			</div>
 		</div>
 	</div>
 </div>
