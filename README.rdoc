@@ -1,28 +1,9 @@
-== README
+== OSU Find-A-Friend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Build
+Status](https://travis-ci.org/osulp/find-a-friend.svg?branch=master)](https://travis-ci.org/osulp/find-a-friend)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+A rails application which allows students to find where their study groups are
+meeting, along with the date and time of the meeting, and a description of the
+group. It also allows students to reply to groups, encourageing clear
+communication and organization.
