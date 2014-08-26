@@ -1,4 +1,5 @@
-== OSU Find-A-Friend
+OSU Find-A-Friend
+=================
 
 [![Build
 Status](https://travis-ci.org/osulp/find-a-friend.svg?branch=master)](https://travis-ci.org/osulp/find-a-friend)
