@@ -20,7 +20,9 @@ describe "homepage" do
       visit root_path
     end
     it "should display the posts" do
-      expect(page).to have_content(post1.title)
+      expect(page).to have_link(post1.title)
+      expect(page).to have_content(post1.description)
+      expect(page).to have_content(post1.meeting_time)
     end
     context "when not logged in as the owner of the post" do
       it "should not have links to edit and delete posts" do

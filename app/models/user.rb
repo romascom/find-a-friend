@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def User.current_user_id
+    if current_user
+      return current_user.id
+    else
+      return nil
+    end
+  end
+
   private
 
   def create_remember_token
