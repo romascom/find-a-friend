@@ -67,9 +67,13 @@
 			<!-- </header> -->
 			<h1>Groups</h1>
 
-			<div class="panel-group" id="accordion">
-				<%= render partial: "post", collection: @posts %>
-			</div>
+      <% if @posts.length != 0 %>
+			  <div class="panel-group" id="accordion">
+				  <%= render partial: "post", collection: @posts %>
+        </div>
+      <% else %>
+        <%= I18n.t('post.no_posts_message') %>
+      <% end %>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 			<!-- Latest compiled and minified JavaScript -->
