@@ -16,7 +16,7 @@ describe 'navbar' do
           click_link "Home"
         end
         it "should route back to the home page" do
-          expect(page).to have_content("Groups")
+          expect(location).to eq root_path
         end
       end
       context "when clicking the new post button" do
