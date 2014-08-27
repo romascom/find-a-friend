@@ -14,10 +14,6 @@ class UsersController < ApplicationController
     respond_with @user, :location => root_path
   end
 
-  def destroy
-    @user.destroy
-  end
-
   private
 
   def find_user

@@ -5,7 +5,8 @@ class SessionsController < ApplicationController
     path = params[:source] || root_path
     redirect_to path
 	end
-  def logout
+
+  def destroy
     RubyCAS::Filter.logout(self)
   end
 end

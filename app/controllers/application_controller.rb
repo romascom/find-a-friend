@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user |= UserDecorator.new(User.new(current_user_username))
+    @current_user ||= User.new({:email => current_user_username})
   end
   helper_method :current_user
 

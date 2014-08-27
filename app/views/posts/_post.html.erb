@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 		<div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> <%= link_to 'Edit', edit_post_path(post), :class => 'edit-link' %> <%= link_to 'Delete', post_path(post), :method => :destroy, :class => 'edit-link' %></h4>
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> <%= link_to 'Edit', edit_post_path(post), :class => 'edit-link' %> <%= link_to 'Delete', post_path(post), :method => :delete, :class => 'edit-link' %></h4>
 	</div>
 	
 		<div class="panel-heading">
