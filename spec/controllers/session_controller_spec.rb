@@ -23,12 +23,10 @@ describe SessionsController do
     end
     context "when logging out" do
       before do
-        binding.pry
         RubyCAS::Filter.fake("test")
         get :destroy
       end
       it "should log out and redirect to root" do
-        expect(response.location).to eq root_url
         expect(response).to redirect_to root_path
       end
     end
