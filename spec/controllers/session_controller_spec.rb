@@ -21,14 +21,5 @@ describe SessionsController do
         expect(response).to redirect_to root_path
       end
     end
-    context "when logging out" do
-      before do
-        RubyCAS::Filter.fake("test")
-        get :destroy
-      end
-      it "should log out and redirect to root" do
-        expect(response).to redirect_to root_path
-      end
-    end
   end
 end
