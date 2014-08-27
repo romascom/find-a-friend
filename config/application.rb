@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module Blog
   class Application < Rails::Application
+    application_config = YAML.load_file('config/config.yml')|| {}
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -29,6 +30,10 @@ module Blog
 	:request_specs => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
+
+    config.rubycas.cas_base_url = application_config["rubycas"]["cas_base_url"]
+    config.rubycas.validate_url = application_config["rubycas"]["validate_url"]
+    config.rubycas.cas_destination_logout_param_name = application_config["rubycas"]["cas_destination_logout_param_name"]
 
     config.i18n.enforce_available_locales = true
   end
