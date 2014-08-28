@@ -8,7 +8,7 @@
         <p><%= f.label :meeting_time %><br>
         <%= f.text_field :meeting_time , :class => 'datetime_picker' %></p>
         <p><%= f.label :end_time %><br>
-        <%= f.text_field :meeting_time , :class => 'datetime_picker' %></p>
+        <%= f.text_field :end_time , :class => 'datetime_picker' %></p>
         <%= f.input :recipients %>
         <%= f.hidden_field :onid, :value => current_user.onid %>
         <%= f.button :submit %>

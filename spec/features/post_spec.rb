@@ -66,7 +66,7 @@ describe 'Posts' do
 			end
 
 			it "should give you an insufficient permissions error" do
-				expect(page).to have_content("You do not have sufficient permissions to complete this request ")
+				expect(page).to have_content(I18n.t("permission_error.error_string"))
 			end
 		end
 		context "when trying to edit a post" do
@@ -75,7 +75,7 @@ describe 'Posts' do
 			end
 
 			it "should give you an insufficient permissions error" do
-				expect(page).to have_content("You do not have sufficient permissions to complete this request ")
+				expect(page).to have_content(I18n.t("permission_error.error_string"))
 			end
 		end
 	end
