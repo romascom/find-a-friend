@@ -37,8 +37,8 @@
             </li>
             
             <li>
-            <%= link_to 'Sign in', signin_path if current_user.email.nil?%>
-            <%= link_to 'Sign out', signout_path, :method => :delete if !current_user.email.nil? %>
+            <%= link_to 'Sign in', signin_path if current_user.onid.nil?%>
+            <%= link_to 'Sign out', signout_path, :method => :delete if !current_user.onid.nil? %>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
