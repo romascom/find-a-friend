@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828162717) do
+ActiveRecord::Schema.define(version: 20140828213323) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 20140828162717) do
     t.datetime "meeting_time"
     t.datetime "expire_time"
     t.text     "recipients"
-    t.integer  "x"
-    t.integer  "y"
     t.datetime "end_time"
     t.string   "location"
     t.string   "onid"
