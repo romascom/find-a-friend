@@ -1,4 +1,4 @@
-<% if current_user.onid.nil? %>
+<% if current_user.nil? %>
   <%= I18n.t("permission_error.error_string") %>
 <% else %>
 	<h1>Edit post</h1>

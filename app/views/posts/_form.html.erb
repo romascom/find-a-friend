@@ -10,7 +10,7 @@
         <p><%= f.label :end_time %><br>
         <%= f.text_field :end_time , :class => 'datetime_picker' %></p>
         <%= f.input :recipients %>
-        <%= f.hidden_field :onid, :value => current_user.onid %>
+        <%= f.hidden_field :onid, :value => current_user %>
         <%= f.button :submit %>
       <% end %>
     </div>

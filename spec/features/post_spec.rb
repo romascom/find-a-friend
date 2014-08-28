@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe 'Posts' do
-	let(:user) {create(:user)}
 	let(:post) {create(:post)}
 
 	context "When logged in" do
 		before do
-    	RubyCAS::Filter.fake(user.onid)
+    	RubyCAS::Filter.fake("testonid")
     	visit signin_path
     	visit root_path
   	end

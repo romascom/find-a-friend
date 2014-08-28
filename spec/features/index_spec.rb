@@ -2,10 +2,9 @@ require 'spec_helper'
 require 'factory_girl_rails'
 
 describe "homepage" do
-  let(:user) {create(:user)}
   let(:post1) {create(:post)}
   before do
-    RubyCAS::Filter.fake(user.onid)
+    RubyCAS::Filter.fake("testonid")
     visit signin_path
     visit root_path
   end
@@ -32,7 +31,7 @@ describe "homepage" do
     end
     context "when logged in as the creator of the post" do
       before do
-        post1.onid = user.onid
+        post1.onid = "testonid"
         post1.save
         visit root_path
       end
