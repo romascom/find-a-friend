@@ -77,6 +77,19 @@ describe 'Posts' do
 				expect(page).to have_content(I18n.t("permission_error.error_string"))
 			end
 		end
+    context "when visiting the show view" do
+      before do
+        visit post_path(post)
+      end
+      it "should display all the post information" do
+        expect(page).to have_content(post.title)
+        expect(page).to have_content(post.onid)
+        expect(page).to have_content(post.description)
+        expect(page).to have_content(post.meeting_time)
+        expect(page).to have_content(post.end_time)
+        expect(page).to have_content(post.location)
+      end
+    end
 	end
 
 end
