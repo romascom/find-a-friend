@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   respond_to :html, :json
   before_filter :current_user, :only => [:create, :edit, :update, :destroy]
-  before_filter :find_post, :only => [:edit, :update, :destroy]
+  before_filter :find_post, :only => [:edit, :update, :destroy, :show]
 
   def index
     @posts = Post.all
@@ -19,6 +19,9 @@ class PostsController < ApplicationController
       flash[:error] = "Unable to save your post"
     end
     respond_with @post, :location => root_path
+  end
+
+  def show
   end
 
   def edit

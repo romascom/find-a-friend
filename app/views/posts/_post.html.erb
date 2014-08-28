@@ -1,9 +1,15 @@
 <div class="panel panel-default">
   <div class="panel panel-heading">
     <div class="panel-title">
-      <%= link_to post.title, post_path(post) %>
-      <%= link_to "Edit", edit_post_path(post), :class => "edit-link" if current_user == post.onid && !current_user.nil?%>
-      <%= link_to "Delete", post_path(post), :method => :delete, :class => "edit-link" if current_user == post.onid && !current_user.nil?%>
+      <div class="row">
+        <div class="col-xs-11">
+          <h4><%= link_to post.title, post_path(post) %></h4>
+        </div>
+        <div class="col-xs-1">
+          <%= link_to "Edit", edit_post_path(post) if current_user == post.onid && !current_user.nil?%>
+          <%= link_to "Delete", post_path(post), :method => :delete if current_user == post.onid && !current_user.nil?%>
+        </div>
+      </div>
     </div>
   </div>
   <div class="panel panel-body">
