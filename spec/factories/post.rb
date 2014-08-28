@@ -7,7 +7,7 @@ FactoryGirl.define do
     x 0
     y 0
     recipients nil
-    user_id 500000
+    onid "blah"
 
     trait :with_recipient do
       after(:build) do |post|

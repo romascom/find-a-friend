@@ -5,8 +5,8 @@ describe "homepage" do
   let(:user) {create(:user)}
   let(:post1) {create(:post)}
   before do
-    #change email to onid when onid is added to schema
-    RubyCAS::Filter.fake(user.email)
+    RubyCAS::Filter.fake(user.onid)
+    visit signin_path
     visit root_path
   end
   context "when there are no posts" do
@@ -26,14 +26,13 @@ describe "homepage" do
     end
     context "when not logged in as the owner of the post" do
       it "should not have links to edit and delete posts" do
-        pending
         expect(page).to_not have_content("Edit")
         expect(page).to_not have_content("Delete")
       end
     end
     context "when logged in as the creator of the post" do
       before do
-        post1.user_id = user.id
+        post1.onid = user.onid
         post1.save
         visit root_path
       end

@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :user do
-    sequence(:email) {|n| "emailnum#{n}@email.com" }
+    sequence(:onid) {|n| "onidnum#{n}" }
   end
 end
