@@ -1,5 +1,5 @@
 class DropUserTable < ActiveRecord::Migration
   def change
-    drop_table :user
+    drop_table(:user, {})
   end
 end
