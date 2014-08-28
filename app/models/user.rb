@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   has_many :posts
 
-  before_save { self.email = email.downcase }
   before_create :create_remember_token
    
   def User.new_remember_token
@@ -10,6 +9,14 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def User.current_user_id
+    if current_user
+      return current_user.id
+    else
+      return nil
+    end
   end
 
   private

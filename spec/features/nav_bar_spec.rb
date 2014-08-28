@@ -19,17 +19,53 @@ describe 'navbar' do
           expect(current_path).to eq root_path
         end
       end
-      context "when clicking the new post button" do
+      context "when not logged in" do
         before do
-          click_link "New post"
+          visit root_path
         end
-        xit "should take you to the new posts page" do
-          expect(page).to have_content("New Post")
+        it "should have a sign-in link" do
+          within(".navbar") do
+            expect(page).to have_link("Sign in")
+          end
+        end
+        context "when clicking the new post button" do
+          before do
+            click_link "New post"
+          end
+          it "should throw a permission error" do
+            expect(page).to have_content(I18n.t("permission_error.error_string"))
+          end
         end
       end
-      context "when clicking the sign in button" do
-        xit "should route you to CAS for OSU login" do
-          expect(page).to have_content("OSU Central Login")
+      context "when logged in" do
+        let(:user) {create(:user)}
+        before do
+          RubyCAS::Filter.fake(user.onid)
+          visit signin_path
+          visit root_path
+        end
+        it "should have a signout link" do
+          within(".navbar") do
+            expect(page).to have_link("Sign out")
+          end
+        end
+        context "when adding a new post" do
+          before do
+            click_link "New post"
+          end
+          it "should show the new post page" do
+            expect(page).to_not have_content(I18n.t("permission_error.error_string"))
+          end
+          context "when creating a new post" do
+            before do
+              fill_in "Title", :with => "test title"
+              fill_in "Description", :with => "test description"
+              click_button "Create Post"
+            end
+            it "should allow the user to create the post" do
+              expect(page).to have_content(Post.first.title)
+            end
+          end
         end
       end
     end

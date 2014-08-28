@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   respond_to :html, :json
-  before_filter :signed_in_user, :only => [:create, :edit, :update, :destroy]
+  before_filter :current_user, :only => [:create, :edit, :update, :destroy]
   before_filter :find_post, :only => [:edit, :update, :destroy]
 
   def index
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.user_id == current_user.id
+    if @post.onid == current_user.onid
       @post.update_attributes(post_params)
     end
     if @post.recipients.present?
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :meeting_time, :recipients, :user_id)
+    params.require(:post).permit(:title, :description, :meeting_time, :recipients, :onid)
   end
 
   def find_post
