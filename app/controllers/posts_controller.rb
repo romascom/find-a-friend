@@ -5,10 +5,6 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    respond_to do |format|
-      format.html {}
-      format.js {}
-    end
   end
 
   def new
@@ -17,16 +13,12 @@ class PostsController < ApplicationController
    
   def create
     @post = Post.new(post_params)
-    flash[:success] = "Successfully posted group" if @post.save
-
-    respond_to do |format|
-      if @post.recipients.present?
-        UserMailer.welcome_email(@post).deliver
-      end
-      format.html { redirect_to "/", notice: 'Post was successfully created.' }
-      format.js   {}
-      format.json { render json: @post, status: :created, location: @post }
+    if @post.save
+      flash[:success] = "Successfully posted group"
+    else
+      flash[:error] = "Unable to save your post"
     end
+    respond_with @post, :location => root_path
   end
 
   def edit

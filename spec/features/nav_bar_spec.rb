@@ -60,10 +60,21 @@ describe 'navbar' do
             before do
               fill_in "Title", :with => "test title"
               fill_in "Description", :with => "test description"
+              fill_in "Location", :with => "Test Location"
               click_button "Create Post"
             end
             it "should allow the user to create the post" do
               expect(page).to have_content(Post.first.title)
+            end
+          end
+          context "when creating a new post with an empty field that is required" do
+            before do
+              fill_in "Title", :with => "test title"
+              fill_in "Description", :with => "test description"
+              click_button "Create Post"
+            end
+            it "should return an error and cant be blank error" do
+              expect(page).to have_content("can't be blank")
             end
           end
         end
