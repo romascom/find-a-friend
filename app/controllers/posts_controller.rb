@@ -1,95 +1,64 @@
-
 class PostsController < ApplicationController
-before_action :signed_in_user, only: [:create, :edit, :update]
-rescue_from SocketError, :with => :connection_error
-def connection_error
-
-  #print "TACOS"
-  #render plain: "MORE TACOS"
-  
-  flash[:notice] = "You're not connected to the internet."
-  redirect_to :back
-  #print "TACOS"
-#redirect_to(:controller => 'start', :action => "post")
-end
-  def new
-    @post = Post.new
-  end
-	
-   
-	def create
-    @post = Post.new(params[:post].permit(:title, :description, :meeting_time, :recipients, :user_id))
-
-    ## if @post.save
-    #  redirect_to action: "index" #Post.all # stop redirection to show
-    #else
-    #  render 'new'
-    #end
-		
-    respond_to do |format|
-      if @post.save
-        if @post.recipients.present?
-	       UserMailer.welcome_email(@post).deliver
-	       end
-        format.html { redirect_to "/", notice: 'Post was successfully created.' }
-        format.js   {}
-        format.json { render json: @post, status: :created, location: @post }
-				
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def show
-    @post = Post.find(params[:id])
-  end
-  
-  def post
-    respond_to do |format|
-      format.js
-    end
-    #@posts = Post.all
-    #respond_to do |format|
-    #  format.html { }
-    #  format.js { }
-    #end
-    #render :partial => "posts/post", collection: @posts
-  end
+  respond_to :html, :json
+  before_filter :current_user, :only => [:create, :edit, :update, :destroy]
+  before_filter :find_post, :only => [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
-    @post = Post.new
-    
     respond_to do |format|
       format.html {}
       format.js {}
     end
   end
 
+  def new
+    @post = Post.new
+  end
+   
+  def create
+    @post = Post.new(post_params)
+    flash[:success] = "Successfully posted group" if @post.save
+
+    respond_to do |format|
+      if @post.recipients.present?
+        UserMailer.welcome_email(@post).deliver
+      end
+      format.html { redirect_to "/", notice: 'Post was successfully created.' }
+      format.js   {}
+      format.json { render json: @post, status: :created, location: @post }
+    end
+  end
+
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
-    #redirect_to action: "index" unless @post.user_id == current_user.id
-    if @post.user_id == current_user.id && @post.update(params[:post].permit(:title, :description, :meeting_time, :recipients, :user_id))
-        if @post.recipients.present?
-          UserMailer.welcome_email(@post).deliver
-        end
-        redirect_to action: "index" #@post
-    	else
-        render 'edit'
+    if @post.onid == current_user.onid
+      @post.update_attributes(post_params)
     end
+    if @post.recipients.present?
+      UserMailer.welcome_email(@post).deliver
+    end
+    respond_with @post, :location => root_path
+  end
+
+  def destroy
+    if @post.destroy
+      flash[:success] = "Successfully deleted"
+    else
+      flash[:error] = "There was a problem in deleting your post"
+    end
+    respond_with @post
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :meeting_time, :recipients, :user_id)
+    params.require(:post).permit(:title, :description, :meeting_time, :recipients, :onid)
   end
 
+  def find_post
+    @post = Post.find(params[:id])
+  end
 	
 end

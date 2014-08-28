@@ -1,21 +1,12 @@
 class SessionsController < ApplicationController
+  before_filter RubyCAS::Filter, :except => :logout
+  
+  def new
+    path = params[:source] || root_path
+    redirect_to path
+  end
 
-	def new
-	end
-	
-	def create
-	   	user = User.find_by(email: params[:session][:email].downcase)
-	    	if user
-		 sign_in user
-		 redirect_to root_url
-	    	else
-		 flash[:error] = 'Invalid email' # Not quite right!
-		 render 'new'
-    		end
-   	end
-	
-	def destroy
-    		sign_out
-    		redirect_to root_url
-  	end
+  def destroy
+    RubyCAS::Filter.logout(self)
+  end
 end

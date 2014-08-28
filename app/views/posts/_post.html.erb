@@ -1,23 +1,13 @@
 <div class="panel panel-default">
-	<% if post.user_id == current_user.id %>
-		<div class="panel-heading">
-			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> <%= link_to 'Edit', edit_post_path(post), :class => 'edit-link' %></h4>
-	</div>
-	
-	<% else %>
-		<div class="panel-heading">
-			<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= dom_id(post) %>"> <%= post.title %> </a> </h4>
-		</div>
-     <% end %>
-
-	<div id="collapse-<%= dom_id(post) %>" class="panel-collapse collapse">
-		<div class="panel-body">
-			<div>
-				<%= post.try(:meeting_time).try(:strftime,'%A, %d %B %Y - %I:%M %p %Z') %>
-			</div>
-			<p>
-				<%= post.description %>
-			</p>
-		</div>
-	</div>
+  <div class="panel panel-heading">
+    <div class="panel-title">
+      <%= link_to post.title, post_path(post) %>
+      <%= link_to "Edit", edit_post_path(post), :class => "edit-link" if current_user.onid == post.onid && !current_user.onid.nil?%>
+      <%= link_to "Delete", post_path(post), :method => :delete, :class => "edit-link" if current_user.onid == post.onid && !current_user.onid.nil?%>
+    </div>
+  </div>
+  <div class="panel panel-body">
+    Description: <%= post.description %><br>
+    Meeting Time: <%= post.meeting_time %>
+  </div>
 </div>
