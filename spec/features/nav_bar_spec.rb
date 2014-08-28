@@ -38,9 +38,8 @@ describe 'navbar' do
         end
       end
       context "when logged in" do
-        let(:user) {create(:user)}
         before do
-          RubyCAS::Filter.fake(user.onid)
+          RubyCAS::Filter.fake("testonid")
           visit signin_path
           visit root_path
         end

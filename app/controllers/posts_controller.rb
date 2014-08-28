@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.onid == current_user.onid
+    if @post.onid == current_user
       @post.update_attributes(post_params)
     end
     if @post.recipients.present?
