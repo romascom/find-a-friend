@@ -39,7 +39,6 @@ describe 'Mailer' do
             end
             it "should send a new email with the new information" do
               expect(ActionMailer::Base.deliveries.length).to eq 2
-              binding.pry
               expect(ActionMailer::Base.deliveries.last.subject).to have_content("New Title")
             end
           end
