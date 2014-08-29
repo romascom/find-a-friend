@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_filter :find_post, :only => [:edit, :update, :destroy, :show]
 
   def index
-    @posts = Post.all
+    @posts = PostDecorator.decorate_collection(Post.all)
   end
 
   def new
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
   end
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]).decorate
   end
 	
 end
