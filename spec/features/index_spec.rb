@@ -21,7 +21,7 @@ describe "homepage" do
     it "should display the posts" do
       expect(page).to have_link(post1.title)
       expect(page).to have_content(post1.description)
-      expect(page).to have_content(post1.meeting_time)
+      expect(page).to have_content(post1.meeting_time.strftime("%A, %B %d, %Y at %H:%M:%S"))
     end
     context "when not logged in as the owner of the post" do
       it "should not have links to edit and delete posts" do
