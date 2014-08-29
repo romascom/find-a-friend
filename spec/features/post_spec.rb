@@ -52,6 +52,21 @@ describe 'Posts' do
       	  end
         end
       end
+      context "after filling out the forms without times" do
+        before do
+          fill_in "Title", :with => "Test Title"
+          fill_in "Description", :with => "Test Description"
+          fill_in "Location", :with => "Test Location"
+          click_button "Create Post"
+        end
+        it "should save and display the proper information" do
+          expect(page).to have_content("Test Title")
+          expect(page).to have_content("Test Description")
+          expect(page).to have_content("Test Location")
+          expect(page).to have_content("No Meeting Time Set")
+          expect(page).to have_content("No Ending Time Set")
+        end
+      end
     end
   end
   context "When not logged in" do
@@ -76,13 +91,31 @@ describe 'Posts' do
       before do
         visit post_path(post)
       end
-      it "should display all the post information" do
-        expect(page).to have_content(post.title)
-        expect(page).to have_content(post.onid)
-        expect(page).to have_content(post.description)
-        expect(page).to have_content(post.meeting_time)
-        expect(page).to have_content(post.end_time)
-        expect(page).to have_content(post.location)
+      context "when there are times set" do
+        it "should display all the post information" do
+          expect(page).to have_content(post.title)
+          expect(page).to have_content(post.onid)
+          expect(page).to have_content(post.description)
+          expect(page).to have_content(post.meeting_time.strftime(I18n.t('time.formats.default')))
+          expect(page).to have_content(post.end_time.strftime(I18n.t('time.formats.default')))
+          expect(page).to have_content(post.location)
+        end
+      end
+      context "when there is no time set" do
+        before do
+          post.meeting_time = nil
+          post.end_time = nil
+          post.save
+          visit post_path(post)
+        end
+        it "should display all proper information" do
+          expect(page).to have_content(post.title)
+          expect(page).to have_content(post.onid)
+          expect(page).to have_content(post.description)
+          expect(page).to have_content("No Meeting Time Set")
+          expect(page).to have_content("No Ending Time Set")
+          expect(page).to have_content(post.location)
+        end
       end
     end
   end

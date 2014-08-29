@@ -11,7 +11,9 @@
         <br>
         Location: <%= @post.location %>
         <br>
-        Meeting Time: <%= @post.meeting_time %> to <%= @post.end_time %>
+        Meeting Time: <%= @post.FormatMeetingTime %>
+        <br>
+        Ending Time: <%= @post.FormatEndingTime %>
         <br>
       </div>
     </div>
