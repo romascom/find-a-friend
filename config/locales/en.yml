@@ -9,6 +9,6 @@ en:
     error_string: "You do not have sufficient permissions to complete this request"
   time:
     formats:
-      default: '%a, %b, %-d, %Y at %r'
+      default: '%A, %B %d, %Y at %H:%M:%S'
       date: '%b %-d, %Y'
       short: '%B %d'
