@@ -15,7 +15,7 @@
   <div class="panel panel-body">
     Description: <%= post.description %><br>
     Location: <%= post.location %><br>
-    Meeting Time: <%= post.meeting_time %><br>
-    End Time: <%= post.end_time %><br>
+    Meeting Time: <%= post.meeting_time.strftime(I18n.t('time.formats.default')) %><br>
+    End Time: <%= post.end_time.strftime(I18n.t('time.formats.default')) %><br>
   </div>
 </div>

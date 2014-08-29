@@ -60,6 +60,8 @@ describe 'navbar' do
               fill_in "Title", :with => "test title"
               fill_in "Description", :with => "test description"
               fill_in "Location", :with => "Test Location"
+              fill_in "Meeting time", :with => Time.now
+              fill_in "End time", :with => Time.now
               click_button "Create Post"
             end
             it "should allow the user to create the post" do
