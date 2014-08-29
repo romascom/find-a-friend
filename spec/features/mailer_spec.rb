@@ -28,7 +28,7 @@ describe 'Mailer' do
       end
       context "then when editing the post" do
         before do
-          visit edit_post_path(post_with_recipient.id)
+          click_link "Edit"
         end
 
         context "and the post has email recipients" do
@@ -39,6 +39,8 @@ describe 'Mailer' do
             end
             it "should send a new email with the new information" do
               expect(ActionMailer::Base.deliveries.length).to eq 2
+              binding.pry
+              expect(ActionMailer::Base.deliveries.last.subject).to have_content("New Title")
             end
           end
         end
