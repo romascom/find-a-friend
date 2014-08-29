@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828213323) do
+ActiveRecord::Schema.define(version: 20140829164434) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20140828213323) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "meeting_time"
-    t.datetime "expire_time"
     t.text     "recipients"
     t.datetime "end_time"
     t.string   "location"

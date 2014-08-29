@@ -4,7 +4,6 @@ FactoryGirl.define do
     description "Description Text"
     location "Location Text"
     meeting_time DateTime.new(2012, 8, 29, 22, 35, 0)
-    expire_time DateTime.new(2013, 8, 29, 22, 35, 0)
     end_time DateTime.new(2014, 8, 29, 22, 35, 0)
     recipients nil
     onid "blah"
