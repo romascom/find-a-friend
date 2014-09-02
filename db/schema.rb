@@ -25,4 +25,12 @@ ActiveRecord::Schema.define(version: 20140829164434) do
     t.string   "onid"
   end
 
+  create_table "replies", force: true do |t|
+    t.integer "post_id"
+    t.string  "onid"
+    t.text    "context"
+  end
+
+  add_index "replies", ["post_id"], name: "index_replies_on_post_id"
+
 end

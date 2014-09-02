@@ -11,4 +11,8 @@ class PostDecorator < Draper::Decorator
     return "No Ending Time Set"
   end
 
+  def today?
+    object.meeting_time.strftime(I18n.t('time.formats.date')) == Time.now.strftime(I18n.t('time.formats.date'))
+  end
+
 end
