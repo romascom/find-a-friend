@@ -53,7 +53,9 @@ describe 'Posts' do
         end
         context "When trying to edit a post" do
       	  before do
-      	    click_link "Edit"
+            within("#accordion") do
+      	      click_link "Edit"
+            end
       	  end
       	  context "should let you fill out new information" do
       	    before do
@@ -67,7 +69,9 @@ describe 'Posts' do
         end
         context "When trying to delete the post" do
       	  before do
-      	    click_link "Delete"
+            within("#accordion") do
+      	      click_link "Delete"
+            end
       	  end
       	  it "should be deleted" do
       	    expect(Post.count).to eq 0

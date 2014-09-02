@@ -1,12 +1,30 @@
 <div class="container-fluid">
 	<%= image_tag "library-banner.jpg", class: "img-responsive img-rounded" %>
 
+  <% if current_user %>
+    <h1>Your Groups</h1>
+
+    <% if @posts.length != 0 %>
+      <% @posts.each do |post| %>
+        <% if post.onid == current_user %>
+          <%= render partial: "post", :object => post %>
+        <% end %>
+      <% end %>
+    <% else %>
+        You have not created any groups
+    <% end %>
+  <% end %>
+
 	<h1>Groups</h1>
 
   <% if @posts.length != 0 %>
-	  <div class="panel-group" id="accordion">
-		  <%= render partial: "post", collection: @posts %>
-    </div>
+    <% @posts.each do |post| %>
+      <% if post.today? %>
+	      <div class="panel-group" id="accordion">
+          <%= render partial: "post", :object => post %>
+        </div>
+      <% end %>
+    <% end %>
   <% else %>
     <%= I18n.t('post.no_posts_message') %>
   <% end %>
