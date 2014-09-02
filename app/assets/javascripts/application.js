@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery-ui-timepicker-addon
+//= require extracted_ajax
 //
 //= require bootstrap
 //= require_tree .
@@ -22,4 +23,4 @@ $(function() {
 		timeFormat : "hh:mm:ss",
 		dateFormat : "yy-mm-dd"
 	});
-})
+});
