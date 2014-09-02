@@ -1,11 +1,17 @@
 Hello, 
   This is a notification from Find-A-Friend notifying about a study session.
 
+<% if @post.allow_onid %>
+<%= @post.onid %> would like to request that you come study!
+<% end %>
+
+Study Event Name:
 <%= @post.title %>
 
+Description:
 <%= @post.description %>
 
-The location will be <%= @post.location %> from <%= @post.FormatMeetingTime %> to <%= @post.FormatEndingTime %>.
+The location will be <%= @post.location %> from <%= @post.meeting_time %> to <%= @post.end_time %>.
 
 Thank you,
   Find-A-Friend

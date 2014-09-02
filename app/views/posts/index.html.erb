@@ -19,11 +19,11 @@
 
   <% if @posts.length != 0 %>
     <% @posts.each do |post| %>
-      <% if post.today? %>
-	      <div class="panel-group" id="accordion">
+      <div class="panel-group" id="accordion">
+        <% if post.today? %>
           <%= render partial: "post", :object => post %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   <% else %>
     <%= I18n.t('post.no_posts_message') %>
