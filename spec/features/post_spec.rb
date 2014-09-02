@@ -10,6 +10,28 @@ describe 'Posts' do
       visit root_path
     end
 
+    context "when there is a post on today" do
+      before do
+        post
+        visit root_path
+      end
+
+      it "should display the post" do
+        expect(page).to have_content(post.title)
+      end
+    end
+
+    context "when there is a post for a day in the future" do
+      before do
+        post.meeting_time = "3014-01-01 12:00:00"
+        post.save
+        visit root_path
+      end
+      it "should not display the post" do
+        expect(page).to_not have_content(post.title)
+      end
+    end
+    
     context "and trying to create a new post" do
   	  before do
         click_link "New post"
@@ -50,21 +72,6 @@ describe 'Posts' do
       	  it "should be deleted" do
       	    expect(Post.count).to eq 0
       	  end
-        end
-      end
-      context "after filling out the forms without times" do
-        before do
-          fill_in "Title", :with => "Test Title"
-          fill_in "Description", :with => "Test Description"
-          fill_in "Location", :with => "Test Location"
-          click_button "Create Post"
-        end
-        it "should save and display the proper information" do
-          expect(page).to have_content("Test Title")
-          expect(page).to have_content("Test Description")
-          expect(page).to have_content("Test Location")
-          expect(page).to have_content("No Meeting Time Set")
-          expect(page).to have_content("No Ending Time Set")
         end
       end
     end
