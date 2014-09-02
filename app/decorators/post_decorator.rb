@@ -12,7 +12,8 @@ class PostDecorator < Draper::Decorator
   end
 
   def today?
-    object.meeting_time.strftime(I18n.t('time.formats.date')) == Time.now.strftime(I18n.t('time.formats.date'))
+    return object.meeting_time.strftime(I18n.t('time.formats.date')) == Time.now.strftime(I18n.t('time.formats.date')) unless object.meeting_time.nil?
+    return false
   end
 
 end

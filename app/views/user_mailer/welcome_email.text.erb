@@ -1,3 +1,23 @@
+Hello, 
+  This is a notification from Find-A-Friend about a study session.
+
+<% if @post.allow_onid %>
+  <%= @post.onid %> would like to request that you come study.
+  You can reply to this person using their onid:
+  <%= @post.onid %>@onid.oregonstate.edu
+<% end %>
+
+Study Event Name:
 <%= @post.title %>
+
+Description:
 <%= @post.description %>
-Let's meet at: <%= @post.meeting_time %>.
+
+Location:
+<%= @post.location %> 
+
+Time:
+From <%= @post.meeting_time %> to <%= @post.end_time %>.
+
+Sincerely,
+  Find-A-Friend

@@ -3,7 +3,10 @@ class UserMailer < ActionMailer::Base
 	
 	def welcome_email(post)
 		@post = post
-		@url = 'http://www.google.com'
-		mail(to: @post.recipients, subject: @post.title)
+    if @post.allow_onid
+		  mail(to: @post.recipients, subject: @post.title)
+    else
+      mail(to: @post.recipients, subject: @post.title)
+    end
 	end
 end

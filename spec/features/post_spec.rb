@@ -28,7 +28,9 @@ describe 'Posts' do
         visit root_path
       end
       it "should not display the post" do
-        expect(page).to_not have_content(post.title)
+        within '#accordion' do
+          expect(page).to_not have_content(post.title)
+        end
       end
     end
     
