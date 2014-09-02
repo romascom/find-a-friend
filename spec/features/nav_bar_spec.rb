@@ -11,9 +11,9 @@ describe 'navbar' do
       expect(page).to have_selector('.navbar')
     end
     context "When using the nav bar" do      
-      context "When clicking the home button" do
+      context "When clicking the Oregon State University button" do
         before do
-          click_link "Home"
+          click_link "Oregon State University"
         end
         it "should route back to the home page" do
           expect(current_path).to eq root_path
