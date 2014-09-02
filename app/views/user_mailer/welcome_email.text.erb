@@ -3,6 +3,8 @@ Hello,
 
 <% if @post.allow_onid %>
 <%= @post.onid %> would like to request that you come study!
+You can reply to this person using their onid!
+<%= @post.onid %>@onid.oregonstate.edu
 <% end %>
 
 Study Event Name:
@@ -11,7 +13,11 @@ Study Event Name:
 Description:
 <%= @post.description %>
 
-The location will be <%= @post.location %> from <%= @post.meeting_time %> to <%= @post.end_time %>.
+Location:
+<%= @post.location %> 
 
-Thank you,
+Time:
+From <%= @post.meeting_time %> to <%= @post.end_time %>.
+
+Sincerely,
   Find-A-Friend

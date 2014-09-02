@@ -13,7 +13,7 @@ class PostDecorator < Draper::Decorator
 
   def today?
     return object.meeting_time.strftime(I18n.t('time.formats.date')) == Time.now.strftime(I18n.t('time.formats.date')) unless object.meeting_time.nil?
-    return "No Meeting Time Set"
+    return false
   end
 
 end
