@@ -1,25 +1,21 @@
-<% if post.meeting_time != nil %>
-<% if post.today? %>
 <div class="panel panel-default">
   <div class="panel panel-heading">
     <div class="panel-title">
       <div class="row">
         <div class="col-xs-11">
-          <h4><%= link_to @posts[0].title, post_path(@posts[0]) %></h4>
+          <h4><%= link_to post.title, post_path(post) %></h4>
         </div>
         <div class="col-xs-1">
-          <%= link_to "Edit", edit_post_path(@posts[0]) if current_user == @posts[0].onid && !current_user.nil?%>
-          <%= link_to "Delete", post_path(@posts[0]), :method => :delete if current_user == @posts[0].onid && !current_user.nil?%>
+          <%= link_to "Edit", edit_post_path(post) if current_user == post.onid && !current_user.nil?%>
+          <%= link_to "Delete", post_path(post), :method => :delete if current_user == post.onid && !current_user.nil?%>
         </div>
       </div>
     </div>
   </div>
   <div class="panel panel-body">
-    Description: <%= @posts[0].description %><br>
-    Location: <%= @posts[0].location %><br>
-    Meeting Time: <%= @posts[0].FormatMeetingTime %><br>
-    End Time: <%= @posts[0].FormatEndingTime %><br>
+    Description: <%= post.description %><br>
+    Location: <%= post.location %><br>
+    Meeting Time: <%= post.FormatMeetingTime %><br>
+    End Time: <%= post.FormatEndingTime %><br>
   </div>
 </div>
-<% end %>
-<% end %>

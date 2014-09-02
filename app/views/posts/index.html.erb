@@ -5,7 +5,11 @@
     <h1>Your Groups</h1>
 
     <% if @posts.length != 0 %>
-      <%= render partial: "your_post", collection: @posts %>
+      <% @posts.each do |post| %>
+        <% if post.onid == current_user %>
+          <%= render partial: "post", :object => post %>
+        <% end %>
+      <% end %>
     <% else %>
         You have not created any groups
     <% end %>
@@ -14,9 +18,13 @@
 	<h1>Groups</h1>
 
   <% if @posts.length != 0 %>
-	  <div class="panel-group" id="accordion">
-		  <%= render partial: "all_post", collection: @posts %>
-    </div>
+    <% @posts.each do |post| %>
+      <% if post.today? %>
+	      <div class="panel-group" id="accordion">
+          <%= render partial: "post", :object => post %>
+        </div>
+      <% end %>
+    <% end %>
   <% else %>
     <%= I18n.t('post.no_posts_message') %>
   <% end %>
