@@ -35,6 +35,10 @@ describe "homepage" do
         post1.save
         visit root_path
       end
+      it "should display your posts at the top of the page" do
+        expect(page).to have_content("Your Groups")
+        expect(page).to have_content(post1.title, :count => 2)
+      end
       it "should have links to edit and delete the post" do
         expect(page).to have_content("Edit")
         expect(page).to have_content("Delete")

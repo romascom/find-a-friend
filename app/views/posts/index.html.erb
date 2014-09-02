@@ -1,11 +1,21 @@
 <div class="container-fluid">
 	<%= image_tag "library-banner.jpg", class: "img-responsive img-rounded" %>
 
+  <% if current_user %>
+    <h1>Your Groups</h1>
+
+    <% if @posts.length != 0 %>
+      <%= render partial: "your_post", collection: @posts %>
+    <% else %>
+        You have not created any groups
+    <% end %>
+  <% end %>
+
 	<h1>Groups</h1>
 
   <% if @posts.length != 0 %>
 	  <div class="panel-group" id="accordion">
-		  <%= render partial: "post", collection: @posts %>
+		  <%= render partial: "all_post", collection: @posts %>
     </div>
   <% else %>
     <%= I18n.t('post.no_posts_message') %>

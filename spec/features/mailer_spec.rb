@@ -28,7 +28,9 @@ describe 'Mailer' do
       end
       context "then when editing the post" do
         before do
-          click_link "Edit"
+          within("#accordion") do
+            click_link "Edit"
+          end
         end
 
         context "and the post has email recipients" do
