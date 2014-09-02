@@ -94,7 +94,6 @@ describe 'Posts' do
       context "when there are times set" do
         it "should display all the post information" do
           expect(page).to have_content(post.title)
-          expect(page).to have_content(post.onid)
           expect(page).to have_content(post.description)
           expect(page).to have_content(post.meeting_time.strftime(I18n.t('time.formats.default')))
           expect(page).to have_content(post.end_time.strftime(I18n.t('time.formats.default')))
@@ -110,7 +109,6 @@ describe 'Posts' do
         end
         it "should display all proper information" do
           expect(page).to have_content(post.title)
-          expect(page).to have_content(post.onid)
           expect(page).to have_content(post.description)
           expect(page).to have_content("No Meeting Time Set")
           expect(page).to have_content("No Ending Time Set")
