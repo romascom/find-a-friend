@@ -1,94 +1,48 @@
 require 'spec_helper'
 require 'factory_girl_rails'
 
-# Would a spec that checks for all elements that should exist in a web page be overkill?
-
-describe "list" do
-  before :each do
-    Capybara.current_driver = :webkit # temporarily select different driver
+describe "homepage" do
+  let(:post1) {create(:post)}
+  before do
+    RubyCAS::Filter.fake("testonid")
+    visit signin_path
+    visit root_path
   end
-  
-  it "should update automatically" do
-    visit('/posts');
-    find('#accordion').should_not have_css('panel panel-default')
-    FactoryGirl.create(:post, title: "test_post", description: "test_description")
-    find('#accordion').should have_css('panel panel-default')
-  end
-end
-
-describe "post" do
-  before :each do
-    Capybara.current_driver = :webkit # temporarily select different driver
-    FactoryGirl.create(:post, title: "test_post", description: "test_description", meeting_time: "", expire_time: "")
-    visit('/posts');
-  end
-
-  it "contains a complete header" do
-    find('#accordion').within(:css, 'h4') do
-      should have_content("test_post")
-      should have_content("Edit") # I think this should be moved to description area
+  context "when there are no posts" do
+    it "should display a message" do
+      expect(page).to have_content(I18n.t('post.no_posts_message'))
     end
   end
-  
-  it "nonviewable if too old" do
-    
-  end
-end
-
-describe "the post creation process" do
-  before :each do
-    visit('/posts')
-  end
-
-  it "adds a new post to page" do
-    click_link('New post')
-    #save_and_open_page
-    within(:css, "form#new_post") do
-      fill_in('post[title]', :with => 'New title')
-      fill_in('post[description]', :with => 'New description')
-      click_button 'Create Post'
+  context "when there are posts entered" do
+    before do
+      post1
+      visit root_path
     end
-    page.should have_content('New title')
-    page.should have_content('New description')
-    page.should have_no_content('Create Post')
-  end
-end
-
-describe "the user", :js => true do
-  before :each do
-    Capybara.current_driver = :webkit # temporarily select different driver
-    FactoryGirl.create(:post, title: "test_post", description: "test_description")
-    visit('/posts');
-  end
-  
-  it "edits a post" do
-    find('#accordion').click_link('Edit')
-    within(:css, "form#edit_post_1") do #may be incorrect id
-      fill_in('post[title]', :with => 'Some title')
-      fill_in('post[description]', :with => 'Some description')
-      click_button 'Update Post'
+    it "should display the posts" do
+      expect(page).to have_link(post1.title)
+      expect(page).to have_content(post1.description)
+      expect(page).to have_content(post1.meeting_time.strftime(I18n.t('time.formats.default')))
     end
-    page.should have_content('Some title')
-click_link('Some title')
-      page.should have_content('Some description')
-  end  
-  
-  it "expands a post" do
-    click_link('New post')
-    #save_and_open_page
-    within(:css, "form#new_post") do
-      fill_in('post[title]', :with => 'Some title')
-      fill_in('post[description]', :with => 'Some description')
-      click_button 'Create Post'
+    context "when not logged in as the owner of the post" do
+      it "should not have links to edit and delete posts" do
+        expect(page).to_not have_content("Edit")
+        expect(page).to_not have_content("Delete")
+      end
     end
-    #within('#accordion') do
-      #find('#collapse-post_1').should have_content('test_post') # It doesn't seem like the post is created
-      #page.should have_no_content('test_description')
-      
-    visit('/posts');
-      click_link('Some title')
-      page.should have_content('Some description')
-      #page.should have_content('test_description')
-    #end
+    context "when logged in as the creator of the post" do
+      before do
+        post1.onid = "testonid"
+        post1.save
+        visit root_path
+      end
+      it "should display your posts at the top of the page" do
+        expect(page).to have_content("Your Groups")
+        expect(page).to have_content(post1.title, :count => 2)
+      end
+      it "should have links to edit and delete the post" do
+        expect(page).to have_content("Edit")
+        expect(page).to have_content("Delete")
+      end
+    end
   end
 end

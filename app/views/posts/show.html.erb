@@ -1,13 +1,27 @@
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="row">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-10">
+    <h1><%= @post.title %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        Group Description: <%= @post.description %>
+        <br>
+        Location: <%= @post.location %>
+        <br>
+        Meeting Time: <%= @post.FormatMeetingTime %>
+        <br>
+        Ending Time: <%= @post.FormatEndingTime %>
+        <br>
+      </div>
+    </div>
 
-<%= link_to 'Back', posts_path %>
+    <%= link_to 'Back', posts_path %>
 
- <%= link_to 'Edit', edit_post_path(@post) %>
+    <% if @post.onid == current_user %>
+      <br>
+      <%= link_to 'Edit', edit_post_path(@post) %>
+    <% end %>
+  </div>
+  <div class="col-xs-1"></div>
+</div>

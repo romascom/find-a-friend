@@ -1,58 +1,19 @@
-
-
-<%= form_for @post do |f| %>
-  <% if @post.errors.any? %>
-
-  <div id="error_explanation">
-    <h2><%= pluralize(@post.errors.count, "error") %> prohibited
-      this post from being saved:</h2>
-    <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <%= simple_form_for(@post, :html => {:class => "form-horizontal"}) do |f| %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :location %>
+        <p><%= f.label :meeting_time %><br>
+        <%= f.text_field :meeting_time , :class => 'datetime_picker' %></p>
+        <p><%= f.label :end_time %><br>
+        <%= f.text_field :end_time , :class => 'datetime_picker' %></p>
+        <%= f.input :recipients %>
+        <%= f.input :allow_onid, :label => "Allow Onid To Be Sent To Recipients?" %>
+        <%= f.hidden_field :onid, :value => current_user %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
   </div>
-  <% end %>
-  <% if flash[:notice] %>
-  	<div class="notice"><%= flash[:notice] %></div>
-  <% end %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
- 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
-	
-  <p>
-  	<%= f.label "Email recipients" %><br>
-    <!-- <%= f.label :recipients %><br> -->
-    <%= f.text_area :recipients %><br>
-    <small>Separate addresses with commas. Example: formatrecipient@example.com, otherrecipient@example.com</small>
-  </p>
-
-  <p>
-  	<%= f.label :meeting_time %><br>
-  	<%= f.text_field :meeting_time , :class => 'datetime_picker' %>
-  	<!--<%= text_field_tag(:meeting_time) %>-->
-  	<!--<%= datetime_select :post, :meeting_time %>
-  	<%= select_year(2009) %>
-  	<%= select_year(Time.now) %>
-  	Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)-->
-  </p>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
- 	
-
-
- 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-
-
-
-
+</div>

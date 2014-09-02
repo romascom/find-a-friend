@@ -12,12 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 //= require jquery-ui-timepicker-addon
+//
+//= require datetime_picker
+//
+//= require bootstrap
 //= require_tree .
-$(function() {
-	$('.datetime_picker').datetimepicker({
-		timeFormat : "hh:mm:ss",
-		dateFormat : "yy-mm-dd"
-	});
-})

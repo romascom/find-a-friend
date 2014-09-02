@@ -1,21 +1,11 @@
-# spec/models/post_spec.rb
 require 'spec_helper'
-require 'factory_girl_rails'
 
 describe Post do
-  it "has a valid factory" do
-    FactoryGirl.build(:post).should be_valid
-  end
-  it "is invalid without a title" do
-    FactoryGirl.build(:post, title: nil).should_not be_valid
-  end
-  it "is invalid if its title is less than 5 characters long" do
-    FactoryGirl.build(:post, title: "WHAT").should_not be_valid
-  end
-  it "is valid without a description" do
-    FactoryGirl.build(:post, description: nil).should be_valid
-  end
-  it "is valid if its title is at least 5 characters long" do
-    FactoryGirl.build(:post, title: "candy").should be_valid
-  end
+
+
+  #Validations
+  it {should validate_presence_of(:title)}
+  it {should validate_presence_of(:description)}
+  it {should validate_presence_of(:onid)}
+  it {should validate_presence_of(:location)}
 end
