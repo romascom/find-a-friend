@@ -1,6 +1,7 @@
 $(function() {
   $('.datetime_picker').datetimepicker({
-    timeFormat : "hh:mm:ss",
+    minDate: new Date(),
+    timeFormat : "hh:mm tt",
     dateFormat : "yy-mm-dd"
   });
 });
