@@ -15,6 +15,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       flash[:success] = "Successfully posted group"
+      if @post.meeting_time
+        if @post.meeting_time.strftime(I18n.t("time.formats.date")) != Time.now.strftime(I18n.t("time.formats.date"))
+          flash[:warning] = "Your post will not be displayed to the public until the day of the event"
+        end
+      end
     else
       flash[:error] = "Unable to save your post"
     end
