@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829164434) do
+ActiveRecord::Schema.define(version: 20140902175025) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -24,13 +24,5 @@ ActiveRecord::Schema.define(version: 20140829164434) do
     t.string   "location"
     t.string   "onid"
   end
-
-  create_table "replies", force: true do |t|
-    t.integer "post_id"
-    t.string  "onid"
-    t.text    "context"
-  end
-
-  add_index "replies", ["post_id"], name: "index_replies_on_post_id"
 
 end
